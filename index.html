@@ -3,22 +3,35 @@
   <body>
     <div id="root"></div>
   </body>
+  <!-- 배포용 -->
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script> 
+ 
+  <!-- 개발용 -->
+  <!-- <script src="https://unpkg.com/react@17.0.2/umd/react.development.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.min.js"></script> -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
     function App() {
-      const [counter, setCounter] = React.useState(0);
-      const onClick = () => {
-        //setCounter(counter + 1);
-        //setCounter(5);
-        setCounter((current) => current + 1);
+      const [minutes, setMinutes] = React.useState(0);
+      const onChange = (event) => {
+        setMinutes(event.target.value);
       };
+      const reset = () => setMinutes(0);
       return (
         <div>
-          <h3>Total Clicks: {counter}</h3>
-          <button onClick={onClick}>Click me</button>
+          <h1>Super Converter</h1>
+          <div>
+            <label for="minutes">Minutes</label>
+            <input value={minutes} id="minutes" placeholder="Minutes" type="number" onChange={onChange}/>
+          </div>
+
+          <div>
+            <label for="hours">Hours</label>
+            <input value={Math.round(minutes / 60)} id="hours" placeholder="Hours" type="number" disabled/>
+          </div>
+          <button onClick={reset}>Reset</button>
         </div>
       );
     }
